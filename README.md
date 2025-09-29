@@ -1,5 +1,6 @@
 # EXPERIMENT--05-INTERFACING-A-4X4-MATRIX-KEYPAD-AND-DISPLAY-THE-OUTPUT-ON-LCD
-
+# Name: Vinothkumar R
+# Reg.NO: 212224040361
 ## Aim: 
 To Interface a 4X4 matrix keypad and show the output on 16X2 LCD display to ARM controller , and simulate it in Proteus
 ## Components required: 
@@ -178,17 +179,139 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
 ![image](https://user-images.githubusercontent.com/36288975/233856904-99eb708a-c907-4595-9025-c9dbd89b8879.png)
 
 ## CIRCUIT DIAGRAM 
- 
+ <img width="795" height="558" alt="image" src="https://github.com/user-attachments/assets/6f31f603-18cb-447f-963e-93e705eb94a5" />
+
 
 ## STM 32 CUBE PROGRAM :
+```
+#include "main.h"
+#include "lcd.h"
+#include "stdbool.h"
+
+bool b1,b2,b3,b4;
+
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+void keypad();
+
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+
+  while (1)
+  {
+	  keypad();
+  }
+}
+
+void keypad()
+{
+  Lcd_PortType ports[]={GPIOA,GPIOA,GPIOA,GPIOA};
+  Lcd_PinType pins[]={GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_2,GPIO_PIN_1};
+  Lcd_HandleTypeDef lcd;
+  lcd=Lcd_create(ports,pins,GPIOB,GPIO_PIN_1,GPIOB,GPIO_PIN_2,LCD_4_BIT_MODE);
+
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_SET);
+
+  b1=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+  b2=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+  b3=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+  b4=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_8);
+
+  Lcd_cursor(&lcd,0,0);
+  if(!b1){
+	  Lcd_string(&lcd,"Key pressed is 7");
+  }
+  else if(!b2){
+	  Lcd_string(&lcd,"Key pressed is 8");
+  }
+  else if(!b3){
+	  Lcd_string(&lcd,"Key pressed is 9");
+  }
+  else if(!b4){
+	  Lcd_string(&lcd,"Key pressed is %");
+  }
+  else{
+	  Lcd_string(&lcd,"No key is pressed");
+  }
+  HAL_Delay(2000);
+
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_SET);
+
+  b1=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+  b2=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+  b3=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+  b4=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_8);
+
+  Lcd_cursor(&lcd,0,0);
+  if(!b1){
+	  Lcd_string(&lcd,"Key pressed is 4");
+  }
+  else if(!b2){
+	  Lcd_string(&lcd,"Key pressed is 5");
+  }
+  else if(!b3){
+	  Lcd_string(&lcd,"Key pressed is 6");
+  }
+  else if(!b4){
+	  Lcd_string(&lcd,"Key pressed is x");
+  }
+  else{
+	  Lcd_string(&lcd,"No key is pressed");
+  }
+  HAL_Delay(2000);
+
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_SET);
+
+  b1=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5);
+  b2=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6);
+  b3=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_7);
+  b4=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_8);
+
+  Lcd_cursor(&lcd,0,0);
+  if(!b1){
+	  Lcd_string(&lcd,"Key pressed is 1");
+  }
+  else if(!b2){
+	  Lcd_string(&lcd,"Key pressed is 2");
+  }
+  else if(!b3){
+	  Lcd_string(&lcd,"Key pressed is 3");
+  }
+  else if(!b4){
+	  Lcd_string(&lcd,"Key pressed is -");
+  }
+  else{
+	  Lcd_string(&lcd,"No key is pressed");
+  }
+  HAL_Delay(3000);
+
+  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,GPIO_PI_
 
 
+```
 
 ## Output screen shots of proteus  :
- 
+
+ <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/e65cf2bd-be22-4063-9f89-eba1c170a238" />
+
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/438399e0-585f-40b4-8e6c-277deed68197" />
+
  
  ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
  
- 
+ <img width="795" height="558" alt="image" src="https://github.com/user-attachments/assets/70af9e7f-16e2-446d-927a-5d0fb37195a7" />
+
 ## Result :
 Interfacing a 4x4 keypad with ARM microcontroller are simulated in proteus and the results are verified.
