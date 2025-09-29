@@ -304,9 +304,11 @@ void keypad()
 
 ## Output screen shots of proteus  :
 
- <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/e65cf2bd-be22-4063-9f89-eba1c170a238" />
+
 
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/438399e0-585f-40b4-8e6c-277deed68197" />
+
+<img width="1435" height="983" alt="image" src="https://github.com/user-attachments/assets/045a60a8-e328-46bf-aa1b-7a80f65b5678" />
 
  
  ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
